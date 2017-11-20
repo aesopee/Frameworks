@@ -22,14 +22,6 @@ public class ConfigLoader {
 			prop.load(input);
 		} catch (IOException ex) {
 			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 	}
 	

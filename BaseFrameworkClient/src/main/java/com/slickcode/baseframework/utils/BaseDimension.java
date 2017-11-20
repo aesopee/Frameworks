@@ -1,6 +1,12 @@
 package com.slickcode.baseframework.utils;
 
-public class BaseDimension {
+import java.io.Serializable;
+
+public class BaseDimension implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6407248076867411326L;
 	private int width;
 	private int height;
 	

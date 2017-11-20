@@ -32,7 +32,7 @@ public final class BaseUtils {
 		component.setBounds(fromLeft + widthSpacing, fromTop + heightSpacing,
 				width - (widthSpacing * 2), height - (heightSpacing * 2));
 		baseDimension.setSize(
-				getMax(baseDimension.getWidth(), fromLeft + width),
+				getMax(Double.valueOf(baseDimension.getWidth()).doubleValue(), Double.valueOf(fromLeft + width).doubleValue()),
 				getMax(baseDimension.getHeight(), fromTop + height));
 	}
 
@@ -52,14 +52,12 @@ public final class BaseUtils {
 	}
 
 	public static int getMax(double value1, double value2) {
-		int val1 = new Double(value1).intValue();
-		int val2 = new Double(value2).intValue();
-		if (val1 == val2) {
-			return val1;
-		} else if (val1 > val2) {
-			return val1;
+		if (value1 == value2) {
+			return Double.valueOf(value1).intValue();
+		} else if (value1 > value2) {
+			return Double.valueOf(value1).intValue();
 		} else {
-			return val2;
+			return Double.valueOf(value2).intValue();
 		}
 	}
 
@@ -140,7 +138,9 @@ public final class BaseUtils {
 			myPicture = ImageIO.read(is);
 		} catch (IOException e) {
 			e.printStackTrace();
+			myPicture = new BufferedImage(10, 10, 1);
 		}
+		
 
 		return populateImage(myPicture, width, height);
 	}
@@ -162,6 +162,7 @@ public final class BaseUtils {
 			myPicture = ImageIO.read(is);
 		} catch (IOException e) {
 			e.printStackTrace();
+			myPicture = new BufferedImage(10, 10, 1);
 		}
 		return populateImage(myPicture, myPicture.getWidth(),
 				myPicture.getHeight());

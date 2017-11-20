@@ -1,7 +1,13 @@
 package com.slickcode.baseframework.domain;
 
-public class SelectItem {
+import java.io.Serializable;
+
+public class SelectItem implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2576691217264073782L;
 	private String label;
 	private String value;
 	

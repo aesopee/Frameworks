@@ -1,11 +1,17 @@
 package com.slickcode.baseframework.domain;
 
+import java.io.Serializable;
+
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import com.slickcode.baseframework.utils.AlignmentEnum;
 
-public class ColumnDataVO {
+public class ColumnDataVO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5425062765665147302L;
 	private String header;
 	private int width;
 	private Class<? extends Object> classType;

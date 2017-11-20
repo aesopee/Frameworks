@@ -1,5 +1,6 @@
 package com.slickcode.baseframework.components;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.swing.ComboBoxModel;
@@ -16,8 +17,12 @@ import com.slickcode.baseframework.domain.SelectItem;
  * @author Sourabh
  *
  */
-public class BaseComboBoxModel implements ComboBoxModel<SelectItem> {
+public class BaseComboBoxModel implements ComboBoxModel<SelectItem>, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 717959837031324351L;
 	private SelectItem selectedItem;
 	private List<SelectItem> selectItemList;
 	protected EventListenerList listenerList = new EventListenerList();

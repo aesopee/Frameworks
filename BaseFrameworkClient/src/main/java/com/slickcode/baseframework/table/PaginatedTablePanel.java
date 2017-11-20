@@ -60,7 +60,7 @@ public final class PaginatedTablePanel extends BasePanel {
 	private int itemsPerPage;
 	private int selectedIndexOfPage;
 
-	private Object[][] data;
+	private transient Object[][] data;
 	private List<ColumnDataVO> columnDataVOList;
 
 	public PaginatedTablePanel(List<ColumnDataVO> columnDataVOList,
@@ -340,6 +340,7 @@ public final class PaginatedTablePanel extends BasePanel {
 
 	@Override
 	public void applyRights() {
+		// This method is kept blank because it will never be called.
 	}
 
 	/**
@@ -381,6 +382,7 @@ public final class PaginatedTablePanel extends BasePanel {
 
 	@Override
 	public void prepareTabOutOrderList() {
+		// This method is kept blank because it will never be called.
 	}
 }
 

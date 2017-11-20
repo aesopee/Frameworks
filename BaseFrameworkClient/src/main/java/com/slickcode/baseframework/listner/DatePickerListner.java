@@ -40,10 +40,12 @@ public class DatePickerListner extends BaseActionListner {
 
 	@Override
 	public void onSuccess() {
+		// No method body because this method will never be get called.
 	}
 
 	@Override
 	public void onFailure() {
+		// No method body because this method will never be get called.
 	}
 
 	@Override

@@ -24,17 +24,19 @@ public abstract class BaseSideMenu extends BasePanel{
 	private int heightPadding = 10;
 	private int widthPadding = 10;
 
-	private BaseDimension baseDimension = new BaseDimension(0, 0);
 	private BaseLabel headerLabel;
 
 	private JLabel picLabel;
 
 	private List<? extends Component> componentList;
 
-	public abstract List<? extends Component> getSideMenu();
+	public abstract List<Component> getSideMenu();
 
 	public abstract String getSidePanelHeaderName();
 
+	public BaseSideMenu() {
+		baseDimension = new BaseDimension(0, 0);
+	}
 	private void populateHeader() {
 		headerLabel = new BaseLabel(getSidePanelHeaderName(), ComponentEnum.HEADER);
 		maxwidth = BaseUtils.getMax(maxwidth, headerLabel.getPreferredSize()

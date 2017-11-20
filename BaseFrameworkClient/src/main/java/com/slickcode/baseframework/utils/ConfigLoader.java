@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigLoader {
-	
+
 	private static Properties prop = null;
 	static {
 
@@ -15,23 +15,20 @@ public class ConfigLoader {
 		InputStream input = null;
 
 		try {
-
 			input = new FileInputStream(configFile);
-
-			// load a properties file
 			prop.load(input);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	public static String getPropertyValue(String properntyKey) {
 		String value = prop.getProperty(properntyKey);
-		
+
 		if (null == value) {
-			System.out.println("No "+properntyKey+" property exists");
+			System.out.println("No " + properntyKey + " property exists");
 		}
 		return value;
 	}
-	
+
 }

@@ -63,8 +63,7 @@ public final class PaginatedTablePanel extends BasePanel {
 	private transient Object[][] data;
 	private List<ColumnDataVO> columnDataVOList;
 
-	public PaginatedTablePanel(List<ColumnDataVO> columnDataVOList,
-			int itemsPerPage, int width, int height) {
+	public PaginatedTablePanel(List<ColumnDataVO> columnDataVOList, int itemsPerPage, int width, int height) {
 		this.columnDataVOList = new ArrayList<ColumnDataVO>();
 		this.columnDataVOList.addAll(columnDataVOList);
 		this.itemsPerPage = itemsPerPage;
@@ -106,20 +105,15 @@ public final class PaginatedTablePanel extends BasePanel {
 			width = ((actualWidth * totalWidth) - modOfWidth) / 100;
 
 			table.getColumnModel().getColumn(i).setPreferredWidth(width);
-			table.getColumnModel()
-					.getColumn(i)
-					.setCellRenderer(columnDataVOList.get(i).getCellAlignment());
+			table.getColumnModel().getColumn(i).setCellRenderer(columnDataVOList.get(i).getCellAlignment());
 		}
 
 		scrollPane = new JScrollPane(table);
-		scrollPane
-				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		add(scrollPane);
 
-		baseDimension.setWidth(BaseUtils.getMax(baseDimension.getWidth() - 20,
-				table.getPreferredSize().getWidth()));
+		baseDimension.setWidth(BaseUtils.getMax(baseDimension.getWidth() - 20, table.getPreferredSize().getWidth()));
 	}
 
 	private void populateNavigations() {
@@ -145,16 +139,14 @@ public final class PaginatedTablePanel extends BasePanel {
 		int fromTop = heightPadding;
 		fromLeft = fromLeft + widthPadding;
 
-		BaseUtils.setBound(box, 0, fromTop, baseDimension.getWidth(), 20, 0, 0,
-				new BaseDimension(0, 0), Alignment.CENTER);
+		BaseUtils.setBound(box, 0, fromTop, baseDimension.getWidth(), 20, 0, 0, new BaseDimension(0, 0),
+				Alignment.CENTER);
 
 		fromLeft = widthPadding;
 		fromTop = heightPadding + heightPadding + 20;
-		BaseUtils.setBound(scrollPane, 0, fromTop, baseDimension.getWidth(),
-				baseDimension.getHeight(), 0, 0, baseDimension,
-				Alignment.CENTER);
-		setPreferredSize(new Dimension(baseDimension.getWidth() + 20,
-				baseDimension.getHeight() + 50 + 20));
+		BaseUtils.setBound(scrollPane, 0, fromTop, baseDimension.getWidth(), baseDimension.getHeight(), 0, 0,
+				baseDimension, Alignment.CENTER);
+		setPreferredSize(new Dimension(baseDimension.getWidth() + 20, baseDimension.getHeight() + 50 + 20));
 	}
 
 	private void populateModel() {
@@ -185,12 +177,10 @@ public final class PaginatedTablePanel extends BasePanel {
 		selectedIndexOfPage = currentPageIndex;
 		sorter.setRowFilter(new RowFilter<TableModel, Integer>() {
 			@Override
-			public boolean include(
-					Entry<? extends TableModel, ? extends Integer> entry) {
+			public boolean include(Entry<? extends TableModel, ? extends Integer> entry) {
 				int ti = currentPageIndex - 1;
 				int ei = entry.getIdentifier();
-				return ti * itemsPerPage <= ei
-						&& ei < ti * itemsPerPage + itemsPerPage;
+				return ti * itemsPerPage <= ei && ei < ti * itemsPerPage + itemsPerPage;
 			}
 		});
 
@@ -215,12 +205,10 @@ public final class PaginatedTablePanel extends BasePanel {
 		}
 
 		ButtonGroup bg = new ButtonGroup();
-		JRadioButton f = makePrevNextRadioButton(itemsPerPage, 1, "|<",
-				currentPageIndex > 1);
+		JRadioButton f = makePrevNextRadioButton(itemsPerPage, 1, "|<", currentPageIndex > 1);
 		box.add(f);
 		bg.add(f);
-		JRadioButton p = makePrevNextRadioButton(itemsPerPage,
-				currentPageIndex - 1, "<", currentPageIndex > 1);
+		JRadioButton p = makePrevNextRadioButton(itemsPerPage, currentPageIndex - 1, "<", currentPageIndex > 1);
 		box.add(p);
 		bg.add(p);
 		box.add(Box.createHorizontalGlue());
@@ -230,20 +218,18 @@ public final class PaginatedTablePanel extends BasePanel {
 			bg.add(c);
 		}
 		box.add(Box.createHorizontalGlue());
-		JRadioButton n = makePrevNextRadioButton(itemsPerPage,
-				currentPageIndex + 1, ">", currentPageIndex < maxPageIndex);
+		JRadioButton n = makePrevNextRadioButton(itemsPerPage, currentPageIndex + 1, ">",
+				currentPageIndex < maxPageIndex);
 		box.add(n);
 		bg.add(n);
-		JRadioButton l = makePrevNextRadioButton(itemsPerPage, maxPageIndex,
-				">|", currentPageIndex < maxPageIndex);
+		JRadioButton l = makePrevNextRadioButton(itemsPerPage, maxPageIndex, ">|", currentPageIndex < maxPageIndex);
 		box.add(l);
 		bg.add(l);
 		box.revalidate();
 		box.repaint();
 	}
 
-	private JRadioButton makeRadioButton(final int itemsPerPage, int current,
-			final int target) {
+	private JRadioButton makeRadioButton(final int itemsPerPage, int current, final int target) {
 		JRadioButton radio = new JRadioButton(String.valueOf(target)) {
 			/**
 			 * 
@@ -279,8 +265,7 @@ public final class PaginatedTablePanel extends BasePanel {
 		return radio;
 	}
 
-	private JRadioButton makePrevNextRadioButton(final int itemsPerPage,
-			final int target, String title, boolean flag) {
+	private JRadioButton makePrevNextRadioButton(final int itemsPerPage, final int target, String title, boolean flag) {
 		JRadioButton radio = new JRadioButton(title);
 		radio.setForeground(Color.BLUE);
 		radio.setUI(LINKVIEW_RADIOBUTTON_UI);
@@ -299,17 +284,14 @@ public final class PaginatedTablePanel extends BasePanel {
 		DefaultTableCellRenderer renderer;
 
 		public HeaderRenderer(JTable table) {
-			renderer = (DefaultTableCellRenderer) table.getTableHeader()
-					.getDefaultRenderer();
+			renderer = (DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer();
 			renderer.setHorizontalAlignment(JLabel.CENTER);
 		}
 
 		@Override
-		public Component getTableCellRendererComponent(JTable table,
-				Object value, boolean isSelected, boolean hasFocus, int row,
-				int col) {
-			return renderer.getTableCellRendererComponent(table, value,
-					isSelected, hasFocus, row, col);
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int col) {
+			return renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
 		}
 	}
 
@@ -423,24 +405,22 @@ class LinkViewRadioButtonUI extends BasicRadioButtonUI {
 		AbstractButton b;
 		if (c instanceof AbstractButton) {
 			b = (AbstractButton) c;
-			text = SwingUtilities.layoutCompoundLabel(b, fm,
-					b.getText(),
-					null, // altIcon != null ? altIcon : getDefaultIcon(),
-					b.getVerticalAlignment(), b.getHorizontalAlignment(),
-					b.getVerticalTextPosition(), b.getHorizontalTextPosition(),
-					viewRect, iconRect, textRect, 0); // b.getText() == null ? 0
-														// :
-														// b.getIconTextGap());
+			text = SwingUtilities.layoutCompoundLabel(b, fm, b.getText(), null, // altIcon != null ? altIcon :
+																				// getDefaultIcon(),
+					b.getVerticalAlignment(), b.getHorizontalAlignment(), b.getVerticalTextPosition(),
+					b.getHorizontalTextPosition(), viewRect, iconRect, textRect, 0); // b.getText() == null ? 0
+																						// :
+																						// b.getIconTextGap());
 		} else {
 			return;
 		}
 
 		ButtonModel model = b.getModel();
 		g.setColor(c.getForeground());
-		if (!model.isSelected() && !model.isPressed() && !model.isArmed()
-				&& b.isRolloverEnabled() && model.isRollover()) {
-			g.drawLine(viewRect.x, viewRect.y + viewRect.height, viewRect.x
-					+ viewRect.width, viewRect.y + viewRect.height);
+		if (!model.isSelected() && !model.isPressed() && !model.isArmed() && b.isRolloverEnabled()
+				&& model.isRollover()) {
+			g.drawLine(viewRect.x, viewRect.y + viewRect.height, viewRect.x + viewRect.width,
+					viewRect.y + viewRect.height);
 		}
 		View v = (View) c.getClientProperty(BasicHTML.propertyKey);
 		if (v == null) {

@@ -83,12 +83,10 @@ public class ImagePicker {
 	}
 	
 	
-    static JLabel label;
-    static BufferedImage icon;
-    static File oldfile;
-    JFileChooser fc;
-    ImageFilter1 fJavaFilter = new ImageFilter1();
-    static File fFile;
+    private JLabel label;
+    private BufferedImage icon;
+    private ImageFilter1 fJavaFilter = new ImageFilter1();
+    private File fFile;
 
 	boolean openFile(Component parent, JPanel panel) throws IOException {
         JFileChooser fc = new JFileChooser();
@@ -102,7 +100,6 @@ public class ImagePicker {
         } else if (result == JFileChooser.APPROVE_OPTION) {
 
             fFile = fc.getSelectedFile();
-            oldfile = fFile;
             FileInputStream fileInputStream = new FileInputStream(fFile);
             icon = ImageIO.read(fileInputStream);
             label = new JLabel(new ImageIcon(icon));

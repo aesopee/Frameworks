@@ -47,6 +47,7 @@ public class SpringUtilities {
      * minimum, preferred, and maximum sizes.
      */
     public static void printSizes(Component c) {
+    	// This method is kept blank because it will never be called.
     }
 
     /**

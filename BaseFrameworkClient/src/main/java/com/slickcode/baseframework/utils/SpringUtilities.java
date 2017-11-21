@@ -31,9 +31,12 @@
 
 package com.slickcode.baseframework.utils;
 
-import javax.swing.*;
+import java.awt.Component;
+import java.awt.Container;
+
+import javax.swing.Spring;
 import javax.swing.SpringLayout;
-import java.awt.*;
+import javax.swing.SpringLayout.Constraints;
 
 /**
  * A 1.4 file that provides utility methods for creating form- or grid-style
@@ -109,8 +112,8 @@ public class SpringUtilities {
 
 		// Then adjust the x/y constraints of all the cells so that they
 		// are aligned in a grid.
-		SpringLayout.Constraints lastCons = null;
-		SpringLayout.Constraints lastRowCons = null;
+		SpringLayout.Constraints lastCons = new Constraints();
+		SpringLayout.Constraints lastRowCons = new Constraints();
 		for (int i = 0; i < max; i++) {
 			SpringLayout.Constraints cons = layout.getConstraints(parent.getComponent(i));
 			if (i % cols == 0) { // start of new row

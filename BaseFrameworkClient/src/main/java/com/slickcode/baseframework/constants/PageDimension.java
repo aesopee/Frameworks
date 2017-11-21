@@ -13,7 +13,7 @@ import com.slickcode.baseframework.utils.ConfigLoader;
  */
 public final class PageDimension {
 
-	private static PageDimension PAGE_DIMENSION;
+	private static final PageDimension PAGE_DIMENSION = new PageDimension();
 
 	private int headerMenuHeight;
 	private int sideMenuWidth;
@@ -37,9 +37,6 @@ public final class PageDimension {
 	 * @return {@link PageDimension}
 	 */
 	public static final PageDimension getInstance() {
-		if (null == PAGE_DIMENSION) {
-			PAGE_DIMENSION = new PageDimension();
-		}
 		return PAGE_DIMENSION;
 	}
 

@@ -12,11 +12,7 @@ public class DateUtilities {
 	}
 
 	public static boolean isDate(String value, String format) {
-		if (null == parseStringToDate(value, format)) {
-			return false;
-		} else {
-			return true;
-		}
+		return (null != parseStringToDate(value, format));
 	}
 
 	public static Date parseStringToDate(String value, String format) {

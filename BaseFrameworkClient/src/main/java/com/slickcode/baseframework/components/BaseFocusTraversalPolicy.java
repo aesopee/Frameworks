@@ -21,7 +21,7 @@ public class BaseFocusTraversalPolicy extends FocusTraversalPolicy {
 	 */
 	private void acceptanceCriteria(Container container, List<Component> order) {
 		List<JPanel> panelList = getChildPanelList(container);
-		this.order = new ArrayList<Component>();
+		this.order = new ArrayList<>();
 		for (Component component : order) {
 			boolean result = checkComponentExistance(container, panelList,
 					component);
@@ -64,7 +64,7 @@ public class BaseFocusTraversalPolicy extends FocusTraversalPolicy {
 	 * @return
 	 */
 	private List<JPanel> getChildPanelList(Container container) {
-		List<JPanel> panelList = new ArrayList<JPanel>();
+		List<JPanel> panelList = new ArrayList<>();
 		for (Component component : container.getComponents()) {
 			if (component instanceof JPanel) {
 				panelList.add((JPanel) component);

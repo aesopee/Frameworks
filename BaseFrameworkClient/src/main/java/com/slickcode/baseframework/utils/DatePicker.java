@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class DatePicker {
 	int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
-	int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);;
+	int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
 	JLabel monthLabel = new JLabel("", JLabel.CENTER);
 
 	JLabel yearLabel = new JLabel("", JLabel.CENTER);
@@ -106,7 +106,7 @@ public class DatePicker {
 			button[x].setText("" + currentDay);
 		}
 		String date = sdf.format(cal.getTime());
-		String dateSplitter[] = date.split(" ");
+		String[] dateSplitter = date.split(" ");
 		monthLabel.setText(dateSplitter[0]);
 		yearLabel.setText(dateSplitter[1]);
 		d.setTitle("Date Picker");

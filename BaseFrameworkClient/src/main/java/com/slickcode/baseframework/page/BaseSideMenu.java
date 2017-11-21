@@ -3,7 +3,6 @@ package com.slickcode.baseframework.page;
 import java.awt.Component;
 import java.util.List;
 
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -72,10 +71,9 @@ public abstract class BaseSideMenu extends BasePanel{
 		 * Header
 		 */
 		fromLeft = fromLeft + widthPadding;
-		fromTop = baseDimension.getHeight() + heightPadding;
+		fromTop = fromTop + heightPadding;
 		BaseUtils.setBound(headerLabel, fromLeft, fromTop, maxwidth, rowHeight,
-				headerLabel.getPreferredSize().getWidth(), 0, baseDimension,
-				Alignment.CENTER);
+				headerLabel.getPreferredSize().getWidth(), 0, baseDimension);
 
 		/**
 		 * Image
@@ -83,7 +81,7 @@ public abstract class BaseSideMenu extends BasePanel{
 		fromLeft = widthPadding;
 		fromTop = baseDimension.getHeight() + heightPadding;
 		BaseUtils.setBound(picLabel, fromLeft, fromTop, maxwidth, rowHeight, 0,
-				0, baseDimension, Alignment.CENTER);
+				0, baseDimension);
 
 		/**
 		 * Components
@@ -93,7 +91,7 @@ public abstract class BaseSideMenu extends BasePanel{
 				fromLeft = widthPadding;
 				fromTop = baseDimension.getHeight() + heightPadding;
 				BaseUtils.setBound(component, fromLeft, fromTop, maxwidth,
-						rowHeight, 0, 0, baseDimension, Alignment.CENTER);
+						rowHeight, 0, 0, baseDimension);
 
 			}
 		}

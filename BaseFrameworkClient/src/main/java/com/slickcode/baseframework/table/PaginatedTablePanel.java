@@ -18,7 +18,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -64,7 +63,7 @@ public final class PaginatedTablePanel extends BasePanel {
 	private List<ColumnDataVO> columnDataVOList;
 
 	public PaginatedTablePanel(List<ColumnDataVO> columnDataVOList, int itemsPerPage, int width, int height) {
-		this.columnDataVOList = new ArrayList<ColumnDataVO>();
+		this.columnDataVOList = new ArrayList<>();
 		this.columnDataVOList.addAll(columnDataVOList);
 		this.itemsPerPage = itemsPerPage;
 		baseDimension.setWidth(width);
@@ -113,7 +112,7 @@ public final class PaginatedTablePanel extends BasePanel {
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		add(scrollPane);
 
-		baseDimension.setWidth(BaseUtils.getMax(baseDimension.getWidth() - 20, table.getPreferredSize().getWidth()));
+		baseDimension.setWidth(BaseUtils.getMax(baseDimension.getWidth() - 20d, table.getPreferredSize().getWidth()));
 	}
 
 	private void populateNavigations() {
@@ -139,13 +138,12 @@ public final class PaginatedTablePanel extends BasePanel {
 		int fromTop = heightPadding;
 		fromLeft = fromLeft + widthPadding;
 
-		BaseUtils.setBound(box, 0, fromTop, baseDimension.getWidth(), 20, 0, 0, new BaseDimension(0, 0),
-				Alignment.CENTER);
+		BaseUtils.setBound(box, 0, fromTop, baseDimension.getWidth(), 20, 0, 0, new BaseDimension(0, 0));
 
 		fromLeft = widthPadding;
 		fromTop = heightPadding + heightPadding + 20;
 		BaseUtils.setBound(scrollPane, 0, fromTop, baseDimension.getWidth(), baseDimension.getHeight(), 0, 0,
-				baseDimension, Alignment.CENTER);
+				baseDimension);
 		setPreferredSize(new Dimension(baseDimension.getWidth() + 20, baseDimension.getHeight() + 50 + 20));
 	}
 
@@ -221,8 +219,7 @@ public final class PaginatedTablePanel extends BasePanel {
 			bg.add(c);
 		}
 		box.add(Box.createHorizontalGlue());
-		JRadioButton n = makePrevNextRadioButton(currentPageIndex + 1, ">",
-				currentPageIndex < maxPageIndex);
+		JRadioButton n = makePrevNextRadioButton(currentPageIndex + 1, ">", currentPageIndex < maxPageIndex);
 		box.add(n);
 		bg.add(n);
 		JRadioButton l = makePrevNextRadioButton(maxPageIndex, ">|", currentPageIndex < maxPageIndex);
@@ -394,7 +391,7 @@ class LinkViewRadioButtonUI extends BasicRadioButtonUI {
 		viewRect.y = i.top;
 		viewRect.width = size.width - i.right - viewRect.x;
 		viewRect.height = size.height - i.bottom - viewRect.y;
-		iconRect.setBounds(0, 0, 0, 0); 
+		iconRect.setBounds(0, 0, 0, 0);
 		textRect.setBounds(0, 0, 0, 0);
 
 		if (c.isOpaque()) {
@@ -406,9 +403,9 @@ class LinkViewRadioButtonUI extends BasicRadioButtonUI {
 		AbstractButton b;
 		if (c instanceof AbstractButton) {
 			b = (AbstractButton) c;
-			text = SwingUtilities.layoutCompoundLabel(b, fm, b.getText(), null,
-					b.getVerticalAlignment(), b.getHorizontalAlignment(), b.getVerticalTextPosition(),
-					b.getHorizontalTextPosition(), viewRect, iconRect, textRect, 0); 
+			text = SwingUtilities.layoutCompoundLabel(b, fm, b.getText(), null, b.getVerticalAlignment(),
+					b.getHorizontalAlignment(), b.getVerticalTextPosition(), b.getHorizontalTextPosition(), viewRect,
+					iconRect, textRect, 0);
 		} else {
 			return;
 		}

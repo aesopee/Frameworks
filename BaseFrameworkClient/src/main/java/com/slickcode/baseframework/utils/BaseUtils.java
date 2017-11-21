@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 
 public final class BaseUtils {
@@ -18,7 +17,7 @@ public final class BaseUtils {
 	}
 
 	public static void setBound(Component component, int fromLeft, int fromTop, int width, int height,
-			double preferredWidth, double preferredHeight, BaseDimension baseDimension, Alignment alignment) {
+			double preferredWidth, double preferredHeight, BaseDimension baseDimension) {
 		int widthSpacing = 0;
 		if (preferredWidth != 0.0d) {
 			widthSpacing = BaseUtils.calculatePerfectSpacing(preferredWidth, width);
@@ -30,14 +29,12 @@ public final class BaseUtils {
 		}
 		component.setBounds(fromLeft + widthSpacing, fromTop + heightSpacing, width - (widthSpacing * 2),
 				height - (heightSpacing * 2));
-		baseDimension.setSize(
-				getMax(Double.valueOf(baseDimension.getWidth()).doubleValue(),
-						Double.valueOf(fromLeft + width).doubleValue()),
-				getMax(baseDimension.getHeight(), fromTop + height));
+		baseDimension.setSize(getMax(baseDimension.getWidth(), fromLeft + width + 0d),
+				getMax(baseDimension.getHeight(), fromTop + height + 0d));
 	}
 
 	public static void setBound(List<? extends Component> componenList, int fromLeft, int fromTop, int width,
-			int height, double preferredWidth, double preferredHeight, BaseDimension baseDimension, Alignment alignment,
+			int height, double preferredWidth, double preferredHeight, BaseDimension baseDimension,
 			int widthPadding) {
 
 		int size = componenList.size();
@@ -45,24 +42,24 @@ public final class BaseUtils {
 		int componentWidth = (width - totalWidthPadding) / size;
 		for (Component component : componenList) {
 			setBound(component, fromLeft, fromTop, componentWidth, height, preferredWidth, preferredHeight,
-					baseDimension, alignment);
+					baseDimension);
 			fromLeft = fromLeft + componentWidth + widthPadding;
 		}
 	}
 
 	public static int getMax(double value1, double value2) {
 		if (value1 == value2) {
-			return Double.valueOf(value1).intValue();
+			return (int) value1;
 		} else if (value1 > value2) {
-			return Double.valueOf(value1).intValue();
+			return (int) value1;
 		} else {
-			return Double.valueOf(value2).intValue();
+			return (int) value2;
 		}
 	}
 
 	private static int calculatePerfectSpacing(double preferredWidth, double columnWidth) {
 		double difference = (columnWidth - preferredWidth) / 2;
-		return new Double(difference).intValue();
+		return (int) difference;
 	}
 
 	public static int calculateWidth(List<? extends Component> componentList, int fieldColumnWidth, int widthPadding,
@@ -76,7 +73,7 @@ public final class BaseUtils {
 				maxValue = getMax(maxValue, componentList.get(i + j).getPreferredSize().getWidth());
 			}
 			fieldColumnWidth = BaseUtils.getMax(fieldColumnWidth,
-					(maxValue * numberOfCompInRow) + (widthPadding * (numberOfCompInRow - 1)));
+					(maxValue * numberOfCompInRow) + (widthPadding * (numberOfCompInRow - 1)) + 0d);
 		}
 		int maxValue = 0;
 		for (int i = size - extraComponents; i < size; i = size + 1) {
@@ -85,7 +82,7 @@ public final class BaseUtils {
 
 		}
 		fieldColumnWidth = BaseUtils.getMax(fieldColumnWidth,
-				(maxValue * numberOfCompInRow) + (widthPadding * (numberOfCompInRow - 1)));
+				(maxValue * numberOfCompInRow) + (widthPadding * (numberOfCompInRow - 1)) + 0d);
 
 		return fieldColumnWidth;
 	}
@@ -100,14 +97,14 @@ public final class BaseUtils {
 
 		for (int i = 0; i < size - extraComponents; i = i + numberOfCompInRow) {
 			BaseUtils.setBound(new ArrayList<Component>(componentList.subList(i, i + numberOfCompInRow)), fromLeft,
-					fromTop, fieldColumnWidth, rowHeight, 0, 0, baseDimension, Alignment.CENTER, widthPadding);
+					fromTop, fieldColumnWidth, rowHeight, 0, 0, baseDimension, widthPadding);
 			fromTop = fromTop + rowHeight + heightPadding;
 		}
 
 		fieldColumnWidth = (componentWidth * extraComponents) + (widthPadding * (extraComponents - 1));
 		for (int i = size - extraComponents; i < size; i = size + 1) {
 			BaseUtils.setBound(new ArrayList<Component>(componentList.subList(i, size)), fromLeft, fromTop,
-					fieldColumnWidth, rowHeight, 0, 0, baseDimension, Alignment.CENTER, widthPadding);
+					fieldColumnWidth, rowHeight, 0, 0, baseDimension, widthPadding);
 			fromTop = fromTop + rowHeight + heightPadding;
 		}
 
@@ -131,8 +128,7 @@ public final class BaseUtils {
 
 	private static ImageIcon populateImage(BufferedImage myPicture, int width, int height) {
 		Image dimg = myPicture.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-		ImageIcon imageIcon = new ImageIcon(dimg);
-		return imageIcon;
+		return new ImageIcon(dimg);
 	}
 
 	public static ImageIcon populateImage(String imagePath) {

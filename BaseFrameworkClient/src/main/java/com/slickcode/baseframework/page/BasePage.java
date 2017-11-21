@@ -33,10 +33,8 @@ public abstract class BasePage extends BasePanel {
 		BaseHeaderPanel headerPanel = getHeaderPanel();
 		JPanel mainPanel = createPanel();
 		JScrollPane jScrollPane = new JScrollPane(mainPanel);
-		jScrollPane
-				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		jScrollPane
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1, 1));
@@ -45,18 +43,11 @@ public abstract class BasePage extends BasePanel {
 		add(headerPanel);
 
 		PageDimension pageDimension = PageDimension.getInstance();
-		headerPanel
-				.setBounds(insets.left, insets.top,
-						pageDimension.getHeaderWidth(),
-						pageDimension.getHeaderHeight());
+		headerPanel.setBounds(insets.left, insets.top, pageDimension.getHeaderWidth(), pageDimension.getHeaderHeight());
 
-		if (null != panel) {
-			add(panel);
-			panel.setBounds(insets.left + pageDimension.getSideMenuWidth(),
-					insets.top + pageDimension.getHeaderHeight(),
-					pageDimension.getMainPanelWidth() - 10,
-					pageDimension.getMainPanelHeight() - 50);
-		}
+		add(panel);
+		panel.setBounds(insets.left + pageDimension.getSideMenuWidth(), insets.top + pageDimension.getHeaderHeight(),
+				pageDimension.getMainPanelWidth() - 10, pageDimension.getMainPanelHeight() - 50);
 	}
 
 	public abstract JPanel populateSideMenu();

@@ -103,7 +103,7 @@ public final class PageDimension {
 	 * @return int
 	 */
 	public int getHeaderWidth() {
-		return MAIN_PAGE_WIDTH;
+		return getMainPageWidth();
 	}
 
 	/**

@@ -33,7 +33,7 @@ public class DatePickerListner extends BaseActionListner {
 	@Override
 	public boolean performAction(ActionEvent e) {
 		Point l = targetField.getLocationOnScreen();
-		targetField.setText(new DatePicker(baseMainPage, l.x, l.y
+		targetField.setText(new DatePicker(l.x, l.y
 				+ targetField.getHeight()).setPickedDate());
 		return true;
 	}

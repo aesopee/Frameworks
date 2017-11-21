@@ -158,14 +158,17 @@ public final class PaginatedTablePanel extends BasePanel {
 			 */
 			private static final long serialVersionUID = 5204063646929730889L;
 
+			@Override
 			public Class<? extends Object> getColumnClass(int columnIndex) {
 				return columnDataVOList.get(columnIndex).getClassType();
 			}
 
+			@Override
 			public boolean isCellEditable(int rowIndex, int columnIndex) {
 				return columnDataVOList.get(columnIndex).isEditable();
 			}
 
+			@Override
 			public String getColumnName(int columnIndex) {
 				return columnDataVOList.get(columnIndex).getHeader();
 			}
@@ -205,31 +208,31 @@ public final class PaginatedTablePanel extends BasePanel {
 		}
 
 		ButtonGroup bg = new ButtonGroup();
-		JRadioButton f = makePrevNextRadioButton(itemsPerPage, 1, "|<", currentPageIndex > 1);
+		JRadioButton f = makePrevNextRadioButton(1, "|<", currentPageIndex > 1);
 		box.add(f);
 		bg.add(f);
-		JRadioButton p = makePrevNextRadioButton(itemsPerPage, currentPageIndex - 1, "<", currentPageIndex > 1);
+		JRadioButton p = makePrevNextRadioButton(currentPageIndex - 1, "<", currentPageIndex > 1);
 		box.add(p);
 		bg.add(p);
 		box.add(Box.createHorizontalGlue());
 		for (int i = startPageIndex; i <= endPageIndex; i++) {
-			JRadioButton c = makeRadioButton(itemsPerPage, currentPageIndex, i);
+			JRadioButton c = makeRadioButton(currentPageIndex, i);
 			box.add(c);
 			bg.add(c);
 		}
 		box.add(Box.createHorizontalGlue());
-		JRadioButton n = makePrevNextRadioButton(itemsPerPage, currentPageIndex + 1, ">",
+		JRadioButton n = makePrevNextRadioButton(currentPageIndex + 1, ">",
 				currentPageIndex < maxPageIndex);
 		box.add(n);
 		bg.add(n);
-		JRadioButton l = makePrevNextRadioButton(itemsPerPage, maxPageIndex, ">|", currentPageIndex < maxPageIndex);
+		JRadioButton l = makePrevNextRadioButton(maxPageIndex, ">|", currentPageIndex < maxPageIndex);
 		box.add(l);
 		bg.add(l);
 		box.revalidate();
 		box.repaint();
 	}
 
-	private JRadioButton makeRadioButton(final int itemsPerPage, int current, final int target) {
+	private JRadioButton makeRadioButton(int current, final int target) {
 		JRadioButton radio = new JRadioButton(String.valueOf(target)) {
 			/**
 			 * 
@@ -238,11 +241,11 @@ public final class PaginatedTablePanel extends BasePanel {
 
 			@Override
 			protected void fireStateChanged() {
-				ButtonModel model = getModel();
-				if (model.isEnabled()) {
-					if (model.isPressed() && model.isArmed()) {
+				ButtonModel buttonModel = getModel();
+				if (buttonModel.isEnabled()) {
+					if (buttonModel.isPressed() && buttonModel.isArmed()) {
 						setForeground(Color.GREEN);
-					} else if (model.isSelected()) {
+					} else if (buttonModel.isSelected()) {
 						setForeground(Color.RED);
 					}
 				} else {
@@ -265,7 +268,7 @@ public final class PaginatedTablePanel extends BasePanel {
 		return radio;
 	}
 
-	private JRadioButton makePrevNextRadioButton(final int itemsPerPage, final int target, String title, boolean flag) {
+	private JRadioButton makePrevNextRadioButton(final int target, String title, boolean flag) {
 		JRadioButton radio = new JRadioButton(title);
 		radio.setForeground(Color.BLUE);
 		radio.setUI(LINKVIEW_RADIOBUTTON_UI);
@@ -391,10 +394,8 @@ class LinkViewRadioButtonUI extends BasicRadioButtonUI {
 		viewRect.y = i.top;
 		viewRect.width = size.width - i.right - viewRect.x;
 		viewRect.height = size.height - i.bottom - viewRect.y;
-		iconRect.setBounds(0, 0, 0, 0); // .x = iconRect.y = iconRect.width =
-										// iconRect.height = 0;
-		textRect.setBounds(0, 0, 0, 0); // .x = textRect.y = textRect.width =
-										// textRect.height = 0;
+		iconRect.setBounds(0, 0, 0, 0); 
+		textRect.setBounds(0, 0, 0, 0);
 
 		if (c.isOpaque()) {
 			g.setColor(c.getBackground());
@@ -405,12 +406,9 @@ class LinkViewRadioButtonUI extends BasicRadioButtonUI {
 		AbstractButton b;
 		if (c instanceof AbstractButton) {
 			b = (AbstractButton) c;
-			text = SwingUtilities.layoutCompoundLabel(b, fm, b.getText(), null, // altIcon != null ? altIcon :
-																				// getDefaultIcon(),
+			text = SwingUtilities.layoutCompoundLabel(b, fm, b.getText(), null,
 					b.getVerticalAlignment(), b.getHorizontalAlignment(), b.getVerticalTextPosition(),
-					b.getHorizontalTextPosition(), viewRect, iconRect, textRect, 0); // b.getText() == null ? 0
-																						// :
-																						// b.getIconTextGap());
+					b.getHorizontalTextPosition(), viewRect, iconRect, textRect, 0); 
 		} else {
 			return;
 		}

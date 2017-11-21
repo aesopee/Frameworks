@@ -22,7 +22,7 @@ import com.slickcode.baseframework.utils.ConfigLoader;
  * 
  */
 public abstract class BaseMainPage extends JFrame {
-
+	
 	/**
 	 * 
 	 */

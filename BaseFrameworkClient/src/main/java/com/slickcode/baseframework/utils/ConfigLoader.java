@@ -6,10 +6,12 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigLoader {
+	private ConfigLoader() {
+
+	}
 
 	private static Properties prop = null;
 	static {
-
 		String configFile = System.getenv("CONFIG_FILE");
 		prop = new Properties();
 		InputStream input = null;

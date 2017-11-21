@@ -7,6 +7,9 @@ import java.util.Date;
 import com.slickcode.baseframework.utils.StringUtilities;
 
 public class DateUtilities {
+	private DateUtilities() {
+
+	}
 
 	public static boolean isDate(String value, String format) {
 		if (null == parseStringToDate(value, format)) {
@@ -17,7 +20,7 @@ public class DateUtilities {
 	}
 
 	public static Date parseStringToDate(String value, String format) {
-		if(StringUtilities.isEmpty(value)){
+		if (StringUtilities.isEmpty(value)) {
 			return null;
 		}
 		SimpleDateFormat dateFormat = new SimpleDateFormat(format);
@@ -25,13 +28,13 @@ public class DateUtilities {
 		try {
 			date = dateFormat.parse(value);
 		} catch (ParseException e) {
-
+			e.printStackTrace();
 		}
 		return date;
 	}
-	
+
 	public static String parseDateToString(Date value, String format) {
-		if(null == value) {
+		if (null == value) {
 			return null;
 		}
 		SimpleDateFormat dateFormat = new SimpleDateFormat(format);

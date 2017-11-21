@@ -20,11 +20,11 @@ public class SelectItem implements Serializable {
 	}
 	
 	public SelectItem(Integer intValue, String label) {
-		String value = "";
+		String strValue = "";
 		if(null != intValue){
-			value = String.valueOf(intValue);
+			strValue = String.valueOf(intValue);
 		}
-		this.value = value;
+		this.value = strValue;
 		this.label = label;
 	}
 	/**

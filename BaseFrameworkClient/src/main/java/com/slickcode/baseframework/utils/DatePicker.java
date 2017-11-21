@@ -2,7 +2,6 @@ package com.slickcode.baseframework.utils;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -17,16 +16,16 @@ public class DatePicker {
 	int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
 	int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);;
 	JLabel monthLabel = new JLabel("", JLabel.CENTER);
-	
+
 	JLabel yearLabel = new JLabel("", JLabel.CENTER);
 	String day = "";
 	JDialog d;
 	JButton[] button = new JButton[49];
 
-	public DatePicker(Component parent, int x, int y) {
+	public DatePicker(int x, int y) {
 		d = new JDialog();
 		d.setModal(true);
-		String[] header = {"Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"};
+		String[] header = { "Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat" };
 		JPanel p1 = new JPanel(new GridLayout(7, 7));
 		p1.setPreferredSize(new Dimension(430, 120));
 
@@ -66,8 +65,8 @@ public class DatePicker {
 			}
 		});
 		p2.add(next);
-		
-		JPanel p3 = new JPanel(new GridLayout(1,3));
+
+		JPanel p3 = new JPanel(new GridLayout(1, 3));
 		JButton prevYear = new JButton("<< Previous");
 		prevYear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
@@ -85,13 +84,12 @@ public class DatePicker {
 			}
 		});
 		p3.add(nextYear);
-		
+
 		d.add(p1, BorderLayout.NORTH);
 		d.add(p2, BorderLayout.CENTER);
 		d.add(p3, BorderLayout.SOUTH);
 		d.pack();
-//		d.setLocationRelativeTo(parent);
-		d.setLocation(x, y+5);
+		d.setLocation(x, y + 5);
 		displayDate();
 		d.setVisible(true);
 	}
@@ -99,14 +97,14 @@ public class DatePicker {
 	public void displayDate() {
 		for (int x = 7; x < button.length; x++)
 			button[x].setText("");
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(
-				"MMMM yyyy");
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MMMM yyyy");
 		java.util.Calendar cal = java.util.Calendar.getInstance();
 		cal.set(year, month, 1);
 		int dayOfWeek = cal.get(java.util.Calendar.DAY_OF_WEEK);
 		int daysInMonth = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
-		for (int x = 6 + dayOfWeek, day = 1; day <= daysInMonth; x++, day++)
-			button[x].setText("" + day);
+		for (int x = 6 + dayOfWeek, currentDay = 1; currentDay <= daysInMonth; x++, currentDay++) {
+			button[x].setText("" + currentDay);
+		}
 		String date = sdf.format(cal.getTime());
 		String dateSplitter[] = date.split(" ");
 		monthLabel.setText(dateSplitter[0]);
@@ -117,8 +115,7 @@ public class DatePicker {
 	public String setPickedDate() {
 		if (day.equals(""))
 			return day;
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(
-				"dd-MM-yyyy");
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
 		java.util.Calendar cal = java.util.Calendar.getInstance();
 		cal.set(year, month, Integer.parseInt(day));
 		return sdf.format(cal.getTime());

@@ -8,6 +8,9 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 public class MenuUtils {
+	private MenuUtils() {
+
+	}
 
 	public static JMenu populateJMenu(String title, Integer mnemonic) {
 		JMenu menu = new JMenu();
@@ -19,15 +22,13 @@ public class MenuUtils {
 		return menu;
 	}
 
-	public static JMenuItem populateJMenuItem(String title, Icon icon,
-			Integer keyStroke, Integer mnemonic) {
+	public static JMenuItem populateJMenuItem(String title, Icon icon, Integer keyStroke, Integer mnemonic) {
 		JMenuItem menuItem = new JMenuItem();
 		menuItem.setFont(FontUtils.MENU_BAR_FONT);
 		menuItem.setText(title);
 		menuItem.setIcon(icon);
 		if (null != keyStroke) {
-			KeyStroke ctrl = KeyStroke.getKeyStroke(keyStroke, Toolkit
-					.getDefaultToolkit().getMenuShortcutKeyMask());
+			KeyStroke ctrl = KeyStroke.getKeyStroke(keyStroke, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
 			menuItem.setAccelerator(ctrl);
 		}
 

@@ -322,7 +322,7 @@ public final class PaginatedTablePanel extends BasePanel {
 
 	@Override
 	public void applyRights() {
-		// This method is kept blank because it will never be called.
+		return;
 	}
 
 	/**
@@ -364,7 +364,7 @@ public final class PaginatedTablePanel extends BasePanel {
 
 	@Override
 	public void prepareTabOutOrderList() {
-		// This method is kept blank because it will never be called.
+		return;
 	}
 }
 
